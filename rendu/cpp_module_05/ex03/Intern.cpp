@@ -21,6 +21,15 @@ AForm*	Intern::createShrubberyCreationForm(const std::string target)
 	return( new ShrubberyCreationForm(target) );
 }
 
+// Factory function to create specific types of forms
+
+/*
+pointer to a function:
+AForm* (*formFuncs)(const std::string);
+array of pointers to the static factory methods in the class
+
+*/
+
 AForm*	Intern::makeForm(const std::string formName, const std::string formTarget)
 {
 	const std::string	formNamePrototypes[3] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};

@@ -17,6 +17,7 @@ public:
     ~Intern();
 
     AForm* makeForm(const std::string formName, const std::string formTarget);
+    // Might be called on the class directly without Intern being initialized .. 
     static AForm* createPresidentialPardonForm(const std::string target);
     static AForm* createRobotomyRequestForm(const std::string target);
     static AForm* createShrubberyCreationForm(const std::string target);

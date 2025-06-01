@@ -5,10 +5,13 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
+
+// Purpose is to implement class that has function that returns a specific type of other class (form) i.e Factory function
+
 int	main()
 {
 	{
-		std::cout << "------------------" << std::endl;
+		std::cout << "Case 1: create forms" << std::endl;
 
 		Intern intern;
 		AForm* form;
@@ -23,7 +26,8 @@ int	main()
 
 			form = intern.makeForm("ShrubberyCreationForm", "Target3");
 			delete form;
-
+			
+			// Should fail
 			form = intern.makeForm("UnknownForm", "Target4");
 			delete form;
 		}
@@ -33,8 +37,10 @@ int	main()
 		}
 		std::cout << "------------------" << std::endl;
 	}
+
+
 	{
-		std::cout << "------------------" << std::endl;
+		std::cout << "Case 2: create forms and sign and execute" << std::endl;
 		try
 		{
 			Intern intern;

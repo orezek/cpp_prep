@@ -92,7 +92,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 	this->writeTreesToFile(filename);
 }
 
-const char *ShrubberyCreationForm::outfileNotOpenException::what(void) const throw()
+// Defining custum exceptio for Shrubbery class
+const char* ShrubberyCreationForm::outfileNotOpenException::what(void) const throw()
 {
 	return ("Cannot open file.");
 }

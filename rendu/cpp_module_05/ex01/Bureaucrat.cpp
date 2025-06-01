@@ -68,6 +68,7 @@ void Bureaucrat::decrementGrade(void) {
   this->_grade++;
 };
 
+// calls form->beSigned() - beSigned has to have validation implemented!
 void	Bureaucrat::signForm(Form& form)
 {
   try

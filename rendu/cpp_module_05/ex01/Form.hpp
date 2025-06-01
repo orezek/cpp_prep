@@ -30,7 +30,8 @@ public:
     bool		getIsSigned() const;
     int			getGradeRequiredToSign() const;
     int			getGradeRequiredToExecute() const;
-    void		beSigned(Bureaucrat&);
+    // changes the form's _isSigned flag; true - check conditions!
+    void		beSigned(Bureaucrat& bureaucrat);
 
     //Exceptions
     class GradeTooLowException : public std::exception
@@ -45,5 +46,5 @@ public:
         virtual const char *what() const throw();
     };
 };
-
+    // Overloading the insertion operator
 std::ostream&	operator<<(std::ostream &outputStream, const Form& form);

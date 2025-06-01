@@ -21,10 +21,18 @@ AForm& AForm::operator=(const AForm& refObj)
 
 AForm::~AForm() {}
 
-std::string	AForm::getName() const {return (name);}
-bool	AForm::getIsSigned() const {return (isSigned);}
-int	AForm::getGradeRequiredToSign() const {return (gradeRequiredToSign);}
-int	AForm::getGradeRequiredToExecute() const {return (gradeRequiredToExecute);}
+std::string	AForm::getName() const {
+	return (name);
+}
+bool	AForm::getIsSigned() const {
+	return (isSigned);
+}
+int	AForm::getGradeRequiredToSign() const {
+	return (gradeRequiredToSign);
+}
+int	AForm::getGradeRequiredToExecute() const {
+	return (gradeRequiredToExecute);
+}
 
 void	AForm::beSigned(Bureaucrat& bureaucrat)
 {

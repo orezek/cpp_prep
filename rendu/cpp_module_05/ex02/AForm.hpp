@@ -25,6 +25,7 @@ public:
     int			getGradeRequiredToExecute() const;
 
     void				beSigned(Bureaucrat&);
+    // add new execute method
     virtual void		execute(Bureaucrat const & executor) const = 0;
 
     //Exceptions
@@ -48,5 +49,3 @@ public:
 };
 
 std::ostream&	operator<<(std::ostream &outputStream, const AForm& form);
-
-#pragma once
