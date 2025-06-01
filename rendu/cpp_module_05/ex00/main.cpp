@@ -80,7 +80,7 @@ int	main(void)
     // Case: 5 should fail - invalid grade range -- too low!
     try
     {
-      std::cout << "Case 5: invalid grade range - low grade"
+      std::cout << "Case 5: invalid grade range - low grade" << std::endl;
       std::cout << "Trying to create bureaucrat with grade 151" << std::endl;
       Bureaucrat highGrade = Bureaucrat("Boss", 151);
     }
