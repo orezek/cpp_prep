@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 11:29:34 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/24 09:52:29 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter() {}
@@ -85,7 +73,7 @@ bool	ScalarConverter::isDouble(const std::string str)
 	return (false);
 }
 
-int	ScalarConverter::typeChoose(const std::string input)
+int	ScalarConverter::determineType(const std::string input)
 {
 	if (input.empty())
 		return (ERROR);
@@ -218,10 +206,8 @@ void	ScalarConverter::convert(const std::string input)
 	int type;
 	values values;
 
-	values.type_of_conversion = typeChoose(input);
+	values.type_of_conversion = determineType(input);
 	type = values.type_of_conversion;
-	// std::cout << "Type: " << type << std::endl;
-	// std::cout << "----------------------" << std::endl;
 	if (type != ERROR)
 	{
 		if (type == CHAR)

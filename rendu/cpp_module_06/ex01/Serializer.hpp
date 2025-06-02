@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 11:57:03 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/24 12:11:55 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -35,5 +22,3 @@ class Serializer
 		const Serializer& operator=(const Serializer&);
 		~Serializer();
 };
-
-#endif

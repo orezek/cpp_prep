@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/21 10:59:06 by mbartos           #+#    #+#              #
-#    Updated: 2024/07/24 12:18:16 by mbartos          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 BOLD =	\033[1m
 GREEN =	\033[32m
 RED =	\033[31m
@@ -21,7 +9,6 @@ NAME =		serialization
 
 #compiler
 CCP =		c++
-# CFLAGS =	-Wall -Wextra -Werror
 CFLAGS =	-Wall -Wextra -Werror -std=c++98
 
 #sources

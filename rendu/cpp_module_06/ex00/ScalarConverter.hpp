@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 11:25:22 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/24 09:59:29 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#pragma once
 
 #include <iostream>
 #include <iomanip>
@@ -50,7 +37,7 @@ class ScalarConverter
 		const ScalarConverter& operator=(const ScalarConverter&);
 		~ScalarConverter();
 
-		static int typeChoose(const std::string input);
+		static int determineType(const std::string input);
 		static bool isSpecial(const std::string str);
 		static bool isChar(const std::string str);
 		static bool isInt(const std::string str);
@@ -79,6 +66,3 @@ class ScalarConverter
 				virtual const char *what() const throw();
 		};
 };
-
-
-#endif

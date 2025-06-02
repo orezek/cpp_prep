@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   StringUtils.cpp                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:43:35 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/19 17:15:00 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "StringUtils.hpp"
 
 bool StringUtils::digitsAndOneDotOnly(const std::string str)
