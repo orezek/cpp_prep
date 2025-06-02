@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Base.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 13:45:40 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/24 14:25:57 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Base.hpp"
 
 Base::~Base () {};
@@ -38,11 +26,6 @@ Base* generate(void)
 	return (basePtr);
 };
 
-// In C++98, dynamic_cast is used for safe downcasting, that is, converting a pointer
-// or reference to a base class to a pointer or reference to a derived class. 
-// This type of cast is primarily used in the context of polymorphism when 
-// you have a base class pointer or reference and you need to determine whether 
-// it actually points to an object of a derived class.
 
 void identify(Base* p)
 {
