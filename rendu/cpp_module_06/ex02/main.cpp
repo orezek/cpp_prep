@@ -2,6 +2,8 @@
 
 int	main ()
 {
+
+    std::cout << "Test CASE: 1" << std::endl;
 	Base* basePtr;
 
 	basePtr = generate();

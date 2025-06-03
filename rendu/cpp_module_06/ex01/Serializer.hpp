@@ -8,6 +8,10 @@
 	{
 		std::string text;
 		int			num;
+        // for testing purposes only!!
+		Data(const char* t, int n)
+		: text(t), num(n)
+		{}
 	};
 
 class Serializer
