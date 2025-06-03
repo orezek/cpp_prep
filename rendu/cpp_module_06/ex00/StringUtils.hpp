@@ -11,5 +11,5 @@ class StringUtils
 		~StringUtils();
 
 	public:
-		static bool digitsAndOneDotOnly(const std::string str);
+		static bool isDigitAndDot(const std::string str);
 };

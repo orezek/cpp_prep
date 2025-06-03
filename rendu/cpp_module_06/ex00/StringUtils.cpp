@@ -1,6 +1,6 @@
 #include "StringUtils.hpp"
 
-bool StringUtils::digitsAndOneDotOnly(const std::string str)
+bool StringUtils::isDigitAndDot(const std::string str)
 {
 	int	dots;
 

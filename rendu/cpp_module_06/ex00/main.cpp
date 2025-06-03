@@ -6,6 +6,13 @@ The purpose is to understand explicit vs implicit (C-style) casting of numeric s
 2) Type detection logic.
 3) Error handling and edge case handling.
 4) Using static (non-instantiable) class.
+
+Used in system and hardware programming - Low level.
+
+a) static_cast - changes the layout of memory - new bits
+b) reinterpret_cast - reinterpret bits as a different type = no bits change
+c) const_cast = only removes const/volatile qualifiers no bits change
+d) dynamic cast<T> = used for polymorphism - no bits change
 */
 
 int	main(int argc, const char** argv)
@@ -19,7 +26,7 @@ int	main(int argc, const char** argv)
 	{
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	//return (0); // comment out if you want to see all the tests
+	return (0); // comment out if you want to see all the tests
 
 	std::cout << "Running Test CASES on random string numeric literals." << std::endl;
 

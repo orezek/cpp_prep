@@ -68,7 +68,7 @@ bool	ScalarConverter::isDouble(const std::string str)
 		i = 1;
 	else
 		i = 0;
-	if (StringUtils::digitsAndOneDotOnly(&str[i]))
+	if (StringUtils::isDigitAndDot(&str[i]))
 		return (true);
 	return (false);
 }
@@ -199,6 +199,15 @@ void	ScalarConverter::printSpecial(const std::string &string, values& values)
 	std::cout << "float: " << values.float_num << "f" << std::endl;
 	std::cout << "double: " << values.double_num << std::endl;
 }
+
+// Algo
+/*
+type - enum
+values struct
+determine source of conversion
+convert
+print - have value validity check for printing!
+ */
 
 
 void	ScalarConverter::convert(const std::string input)
