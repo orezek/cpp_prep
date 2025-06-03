@@ -5,6 +5,26 @@ ScalarConverter::ScalarConverter(const ScalarConverter& refObj) { *this = refObj
 const ScalarConverter& ScalarConverter::operator=(const ScalarConverter& refObj) { (void)refObj; return (*this); };
 ScalarConverter::~ScalarConverter() {}
 
+// utility method
+
+bool ScalarConverter::isDigitAndDot(const std::string str)
+{
+	int	dots;
+
+	dots = 0;
+	for (std::string::size_type i = 0; i < str.size(); i++)
+	{
+		if (str[i] != '.' && !(str[i] >= '0' && str[i] <= '9'))
+			return (false);
+		if (str[i] == '.')
+			dots++;
+	}
+	if (dots != 1)
+		return (false);
+	return (true);
+}
+
+
 bool	ScalarConverter::isChar(const std::string str)
 {
 	if (!isdigit(static_cast<unsigned char>(str[0])) && str.size() == 1)
@@ -68,7 +88,7 @@ bool	ScalarConverter::isDouble(const std::string str)
 		i = 1;
 	else
 		i = 0;
-	if (StringUtils::isDigitAndDot(&str[i]))
+	if (ScalarConverter::isDigitAndDot(&str[i]))
 		return (true);
 	return (false);
 }

@@ -12,7 +12,7 @@ CCP =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98
 
 #sources
-SRC =	main.cpp ScalarConverter.cpp StringUtils.cpp
+SRC =	main.cpp ScalarConverter.cpp
 
 #objects
 OBJ_PATH =	obj/
