@@ -1,32 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 11:21:37 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/25 12:17:15 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "iter.hpp"
 
-template <typename T>
-void addTwenty(T& num)
-{
-	num = num + 20;
+void addTen(int& n) {
+  n = n + 10;
 }
 
-void makeUpper(char& c)
+void addTen(double& n) {
+	n = n + 10;
+}
+
+void ftToLower(char& c)
 {
-	if(islower(c))
-		c = toupper(c);
+	c = std::tolower(static_cast<unsigned char>(c));
+}
+
+void ftToUpper(char& c)
+{
+	c = std::toupper(static_cast<unsigned char>(c));
 }
 
 int main()
 {
-	std::cout << "------------- Add 20 to ints in array -------------" << std::endl;
+	std::cout << "-------- CASE 1: Add 10 to ints in array -------------" << std::endl;
 	{
 		int arr[3] = {1, 2, 3};
 
@@ -34,7 +28,7 @@ int main()
 		for (std::size_t i = 0; i < 3; i++)
 			std::cout << "arr[" << i << "] = " << arr[i] << std::endl;
 
- 		iter(arr, 3, addTwenty<int>);
+ 		iter(arr, 3, addTen);
 
 		std::cout << std::endl;
 
@@ -42,7 +36,7 @@ int main()
 		for (std::size_t i = 0; i < 3; i++)
 			std::cout << "arr[" << i << "] = " << arr[i] << std::endl;
 	}
-	std::cout << "------------ Add 20 to doubles in array ------------" << std::endl;
+	std::cout << "------- CASE 2: Add 10 to doubles in array ------------" << std::endl;
 	{
 		double arr[3] = {1.123, 2.456, 3.789};
 
@@ -50,7 +44,7 @@ int main()
 		for (std::size_t i = 0; i < 3; i++)
 			std::cout << "arr[" << i << "] = " << arr[i] << std::endl;
 
- 		iter(arr, 3, addTwenty<double>);
+ 		iter(arr, 3, addTen);
 
 		std::cout << std::endl;
 
@@ -58,14 +52,14 @@ int main()
 		for (std::size_t i = 0; i < 3; i++)
 			std::cout << "arr[" << i << "] = " << arr[i] << std::endl;
 	}
-	std::cout << "-------------- All chars to uppercase --------------" << std::endl;
+	std::cout << "-------CASE 3: Convert to upper case letters ------" << std::endl;
 	{
-		char arr[15] = "Hi, evaluator!";
+		char arr[18] = "Hello, my friend!";
 
 		std::cout << "Before iter:" << std::endl;
 		std::cout << arr << std::endl;
 
- 		iter(arr, 15, makeUpper);
+ 		iter(arr, 18, ftToUpper);
 
 		std::cout << std::endl;
 
