@@ -7,7 +7,6 @@
 #include <cctype>
 #include <cstdlib>
 
-#include "StringUtils.hpp"
 
 #define PRECISION 3
 
@@ -56,6 +55,9 @@ class ScalarConverter
 		static void printFloat(values& values);
 		static void printDouble(values& values);
 		static void	printOutput(values& values);
+
+		// utility
+		static bool isDigitAndDot(const std::string str);
 
 	public:
 		static void	convert(const std::string input);
