@@ -66,6 +66,20 @@ int main()
 		std::cout << "After iter:" << std::endl;
 		std::cout << arr << std::endl;
 	}
+	std::cout << "-------CASE 4: Convert to lower case letters ------" << std::endl;
+	{
+		char arr[18] = "HELLO, MY FRIEND!";
+
+		std::cout << "Before iter:" << std::endl;
+		std::cout << arr << std::endl;
+
+		iter(arr, 18, ftToLower);
+
+		std::cout << std::endl;
+
+		std::cout << "After iter:" << std::endl;
+		std::cout << arr << std::endl;
+	}
 	std::cout << "----------------------------------------------------" << std::endl;
 	return (0);
 }
