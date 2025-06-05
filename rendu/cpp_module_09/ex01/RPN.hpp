@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   RPN.hpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 14:35:29 by mbartos           #+#    #+#             */
-/*   Updated: 2024/08/12 10:28:27 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef RPN_HPP
-#define RPN_HPP
+#pragma once
 
 #include <stack>
 #include <string>
@@ -39,4 +26,3 @@ class RPN
 		std::stack<long int> stack;
 };
 
-#endif

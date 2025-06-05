@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Span.hpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 11:24:32 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/31 14:29:54 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef SPAN_HPP
-#define SPAN_HPP
+#pragma once
 
 #include <iostream>
 #include <cstdlib>
@@ -53,5 +40,3 @@ class Span
 		unsigned int		maxNumbers;
 		std::multiset<int>	numbers;
 };
-
-#endif

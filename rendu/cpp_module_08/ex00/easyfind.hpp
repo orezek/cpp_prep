@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 14:30:11 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/30 10:45:01 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef EASYFIND_HPP
-#define EASYFIND_HPP
+#pragma once
 
 #include <iostream>
 #include <exception>
@@ -40,5 +27,3 @@ void	easyfind(const T& container, int num)
 		throw ValueNotFound();
 	return ;
 }
-
-#endif

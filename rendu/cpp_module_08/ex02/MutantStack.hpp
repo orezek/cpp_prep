@@ -1,18 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   MutantStack.hpp                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbartos <mbartos@student.42prague.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 15:22:54 by mbartos           #+#    #+#             */
-/*   Updated: 2024/07/31 15:52:33 by mbartos          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef MUTANTSTACK_HPP
-#define MUTANTSTACK_HPP
-
+#pragma once
 #include <stack>
 #include <algorithm>
 #include <iostream>
@@ -55,5 +41,3 @@ class MutantStack : public std::stack<T>
 			return this->c.end();
 		}
 };
-
-#endif
