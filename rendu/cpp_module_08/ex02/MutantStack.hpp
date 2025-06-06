@@ -1,43 +1,32 @@
 #pragma once
 #include <stack>
-#include <algorithm>
-#include <iostream>
+#include <deque>
 
-template <class T>
-class MutantStack : public std::stack<T>
+template <typename T, typename Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>
 {
-	// inherits from stack
+public:
+    MutantStack() {}
+    MutantStack(const MutantStack& other) : std::stack<T, Container>(other) {}
+    MutantStack& operator=(const MutantStack& rhs)
+    {
+        if (this != &rhs)
+            std::stack<T, Container>::operator=(rhs);
+        return *this;
+    }
+    ~MutantStack() {}
 
-	public:
-		MutantStack(){}
-		~MutantStack(){}
-		MutantStack(const MutantStack &stack) { *this = stack; }
-		// assignment operator is used from stack class
+    typedef typename std::stack<T, Container>::container_type::iterator               iterator;
+    typedef typename std::stack<T, Container>::container_type::const_iterator         const_iterator;
+    typedef typename std::stack<T, Container>::container_type::reverse_iterator       reverse_iterator;
+    typedef typename std::stack<T, Container>::container_type::const_reverse_iterator const_reverse_iterator;
 
-		// This line defines a type alias iterator for the iterator type of the underlying container used by std::stack<T>.
-		// std::stack is typically implemented using another container (like std::deque or std::vector).
-		// The container_type is a type alias in std::stack that represents this underlying container type.
-		// By accessing container_type::iterator, you're referring to the iterator type of that container.
-		typedef typename std::stack<T>::container_type::iterator iterator;
-		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
-
-		// this->c refers to the underlying container in std::stack<T>.
-		// The begin() function of the underlying container returns an iterator pointing to the first element.
-		iterator begin()
-		{
-			return this->c.begin();
-		}
-		const_iterator begin() const
-		{
-			return this->c.begin();
-		}
-
-		iterator end()
-		{
-			return this->c.end();
-		}
-		const_iterator end() const
-		{
-			return this->c.end();
-		}
+    iterator               begin()        { return this->c.begin(); }
+    const_iterator         begin()  const { return this->c.begin(); }
+    iterator               end()          { return this->c.end();   }
+    const_iterator         end()    const { return this->c.end();   }
+    reverse_iterator       rbegin()       { return this->c.rbegin();}
+    const_reverse_iterator rbegin() const { return this->c.rbegin();}
+    reverse_iterator       rend()         { return this->c.rend();  }
+    const_reverse_iterator rend()   const { return this->c.rend();  }
 };
