@@ -1,69 +1,100 @@
+// test_easyfind.cpp
+// -------------------------------------------------------------
+// C++98 test-suite for easyfind<T>(container, int)
+// -------------------------------------------------------------
 #include "easyfind.hpp"
 #include <vector>
 #include <list>
 #include <deque>
+#include <iostream>
 
-int	main()
+static void printBanner(int n, const std::string& what)
 {
-	{
-		std::vector<int> vec;
+    std::cout << "\n===== TEST CASE " << n << " -- " << what << " =====\n";
+}
 
-		vec.push_back(10);
-		vec.push_back(20);
-		vec.push_back(30);
-		vec.push_back(40);
-		vec.push_back(50);
+int main()
+{
+    std::cout << "========== EASYFIND TEST SUITE ==========\n";
 
-		try
-		{
-			easyfind(vec, 30); // This will print '3' if the number is found
-			easyfind(vec, 60); // This will print nothing if the number is not found
-		}
-		catch(std::exception& e)
-		{
-			std::cerr << "Error: " << e.what() << '\n';
-		}
-	}
-	std::cout << "----------------------------------------------------" << std::endl;
-	{
-		std::list<int> list;
+    // ---------- 1 : std::vector  (element present) ----------
+    printBanner(1, "std::vector<int>  | element present");
+    {
+        std::vector<int> vec;
+        vec.push_back(10); vec.push_back(20); vec.push_back(30);
+        try {
+            easyfind(vec, 20);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << '\n';
+        }
+    }
 
-		list.push_back(10);
-		list.push_back(20);
-		list.push_back(30);
-		list.push_back(40);
-		list.push_back(50);
+    // ---------- 2 : std::vector  (element absent) ----------
+    printBanner(2, "std::vector<int>  | element absent");
+    {
+        std::vector<int> vec;
+        vec.push_back(1); vec.push_back(2); vec.push_back(3);
+        try {
+            easyfind(vec, 99);          // should throw
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Caught: " << e.what() << '\n';
+        }
+    }
 
-		try
-		{
-			easyfind(list, 30); // This will print '3' if the number is found
-			easyfind(list, 60); // This will print nothing if the number is not found
-		}
-		catch(std::exception& e)
-		{
-			std::cerr << "Error: " << e.what() << '\n';
-		}
-	}
-	std::cout << "----------------------------------------------------" << std::endl;
-	{
-		std::deque<int> deque;
+    // ---------- 3 : std::list    (element present) ----------
+    printBanner(3, "std::list<int>    | element present");
+    {
+        std::list<int> lst;
+        lst.push_back(5); lst.push_back(15); lst.push_back(25);
+        try {
+            easyfind(lst, 25);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << '\n';
+        }
+    }
 
-		deque.push_back(10);
-		deque.push_back(20);
-		deque.push_back(30);
-		deque.push_back(40);
-		deque.push_back(50);
+    // ---------- 4 : std::list    (element absent) ----------
+    printBanner(4, "std::list<int>    | element absent");
+    {
+        std::list<int> lst;
+        lst.push_back(7); lst.push_back(14); lst.push_back(21);
+        try {
+            easyfind(lst, 0);           // should throw
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Caught: " << e.what() << '\n';
+        }
+    }
 
-		try
-		{
-			easyfind(deque, 30); // This will print '3' if the number is found
-			easyfind(deque, 60); // This will print nothing if the number is not found
-		}
-		catch(std::exception& e)
-		{
-			std::cerr << "Error: " << e.what() << '\n';
-		}
-	}
+    // ---------- 5 : std::deque   (element present) ----------
+    printBanner(5, "std::deque<int>   | element present");
+    {
+        std::deque<int> deq;
+        deq.push_back(42); deq.push_back(43); deq.push_back(44);
+        try {
+            easyfind(deq, 44);
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << '\n';
+        }
+    }
 
-	return (0);
+    // ---------- 6 : std::deque   (element absent) ----------
+    printBanner(6, "std::deque<int>   | element absent");
+    {
+        std::deque<int> deq;
+        deq.push_back(-1); deq.push_back(-2); deq.push_back(-3);
+        try {
+            easyfind(deq, 100);         // should throw
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Caught: " << e.what() << '\n';
+        }
+    }
+
+    std::cout << "\n========== ALL TESTS COMPLETED ==========\n";
+    return 0;
 }

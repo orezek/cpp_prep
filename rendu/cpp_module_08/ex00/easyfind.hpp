@@ -11,18 +11,18 @@ class ValueNotFound : public std::exception
 };
 
 const char* ValueNotFound::what() const throw() {
-    return "Value not found in the container.";
+    return "Value not found.";
 }
 
-template <typename T>
-void	easyfind(const T& container, int num)
+template <typename T> void	easyfind(const T& container, int num)
 {
+  // tells the compiler this is a type since it cannot know before hand
 	typename T::const_iterator it;
 
 	it = std::find(container.begin(), container.end(), num);
 
 	if (it != container.end())
-		std::cout << "Element '" << *it << "' was found." << std::endl;
+		std::cout << "The Element: \"" << *it << "\" was found." << std::endl;
 	else
 		throw ValueNotFound();
 	return ;
