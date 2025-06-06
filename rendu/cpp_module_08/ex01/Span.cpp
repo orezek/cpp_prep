@@ -1,94 +1,103 @@
 #include "Span.hpp"
+#include <ctime>
 
-Span::Span() : maxNumbers(0) {};
+/*------------- canonical forn ----------------*/
+Span::Span() : _maxN(0) {}
 
-Span::Span(unsigned int maxNums) : maxNumbers(maxNums) {};
+Span::Span(unsigned int maxNums) : _maxN(maxNums) {}
 
-Span::Span(const Span& refObj) : maxNumbers(refObj.maxNumbers) {};
+Span::Span(const Span& ref) : _maxN(ref._maxN), _numbers(ref._numbers) {}
 
-Span& Span::operator=(const Span& refObj)
+Span& Span::operator=(const Span& ref)
 {
-	maxNumbers = refObj.maxNumbers;
-	return (*this);
-};
-
-Span::~Span() {};
-
-void Span::addNumber(int newNumber)
-{
-	if (numbers.size() < maxNumbers && maxNumbers != 0)
-		numbers.insert(newNumber);
-	else
-		throw MaxNumbers();
-};
-
-void Span::addManyNumbers(int count)
-{
-	if (numbers.size() == maxNumbers)
-		throw MaxNumbers();
-	if (count + numbers.size() > maxNumbers)
-	{
-		count = maxNumbers - numbers.size();
-		std::cout << "Max limit of numbers would be reached. Only " << count << " random numbers will be added to span." << std::endl;
-	}
-
-	srand(time(0));
-	std::vector<int> range;
-	int number;
-	for (int i = 0; i != count; ++i)
-	{
-		number = rand();
-		range.push_back(number);
-	}
-	numbers.insert(range.begin(), range.end());
-	// std::cout << "Span size is: " << numbers.size() << " and max size is: " << maxNumbers << std::endl;
+    if (this != &ref)
+    {
+        this->_maxN   = ref._maxN;
+        this->_numbers = ref._numbers;
+    }
+    return *this;
 }
 
+Span::~Span() {}
+
+/*------------- state modifiers ----------------*/
+void Span::addNumber(int newNumber)
+{
+    if (this->_numbers.size() < this->_maxN || this->_maxN == 0)
+        this->_numbers.insert(newNumber);
+    else
+        throw MaxNumbersException();
+}
+
+void Span::addMultipleN(int count)           // renamed  ✅
+{
+    if (this->_numbers.size() == this->_maxN)
+        throw MaxNumbersException();
+
+    if (static_cast<unsigned int>(count) + this->_numbers.size() > this->_maxN)
+    {
+        count = static_cast<int>(this->_maxN - this->_numbers.size());
+        std::cout << "Max limit would be exceeded. Only "
+                  << count << " random numbers will be added.\n";
+    }
+
+    std::vector<int> tmp;
+    tmp.reserve(count);
+
+    std::srand(std::time(0));
+    for (int i = 0; i < count; ++i)
+        tmp.push_back(std::rand());
+
+    this->_numbers.insert(tmp.begin(), tmp.end());
+}
+
+/*------------- span queries --------------*/
 long int Span::longestSpan()
 {
-	if (numbers.size() < 2)
-		throw NotEnoughNumbers();
+    if (this->_numbers.size() < 2)
+        throw NotEnoughNumbersException();
 
-	long int result = labs(static_cast<long int>(*numbers.rbegin()) - static_cast<long int>(*numbers.begin()));
-	return (result);
-};
+    return std::labs(
+        static_cast<long int>(*this->_numbers.rbegin()) -
+        static_cast<long int>(*this->_numbers.begin()));
+}
 
 long int Span::shortestSpan()
 {
-	if (numbers.size() < 2)
-		throw NotEnoughNumbers();
+    if (this->_numbers.size() < 2)
+        throw NotEnoughNumbersException();
 
-	long int difference = INT_MAX;
-	std::multiset<int>::const_iterator it = numbers.begin();
-	long int temp_number = static_cast<long int>(*it);
+    long int diff = LONG_MAX;
+    std::multiset<int>::const_iterator it = this->_numbers.begin();
+    long int prev = static_cast<long int>(*it);
 
-	for (++it; it != numbers.end(); ++it)
-	{
-		if (labs(temp_number - static_cast<long int>(*it)) < difference)
-			difference = labs(temp_number - static_cast<long int>(*it));
-		temp_number = static_cast<long int>(*it);
-	}	
-	return (difference);
-};
+    for (++it; it != this->_numbers.end(); ++it)
+    {
+        long int curr = static_cast<long int>(*it);
+        long int d = std::labs(curr - prev);
+        if (d < diff) diff = d;
+        prev = curr;
+    }
+    return diff;
+}
 
-void Span::printInt(int number)
-{
-	std::cout << number << ", ";
-};
+/*------------- helpers / I/O -------------*/
+void Span::printInt(int n) { std::cout << n << ", "; }
 
 void Span::printNumbers() const
 {
-	std::cout << "Numbers: ";
-	std::for_each(numbers.begin(), numbers.end(), Span::printInt);
-	std::cout << std::endl;
-};
+    std::cout << "Numbers: ";
+    std::for_each(this->_numbers.begin(), this->_numbers.end(), Span::printInt);
+    std::cout << '\n';
+}
 
-const char* Span::NotEnoughNumbers::what() const throw()
+/*------------- exception text ------------*/
+const char* Span::NotEnoughNumbersException::what() const throw()
 {
-	return "There is not enough numbers in Span!";
-};
+    return "Not enough numbers to compute a span.";
+}
 
-const char* Span::MaxNumbers::what() const throw()
+const char* Span::MaxNumbersException::what() const throw()
 {
-	return "Max limit of numbers in Span reached!";
-};
+    return "Maximum number of elements already reached.";
+}
