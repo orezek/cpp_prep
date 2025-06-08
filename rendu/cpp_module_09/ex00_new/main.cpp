@@ -64,6 +64,13 @@ int main(int argc, char** argv) {
         std::cerr << "Error: could not open file." << std::endl;
         return 1;
     }
+
+    // Check if file is empty
+    if (input.peek() == std::ifstream::traits_type::eof()) {
+        std::cerr << "Error: empty input file." << std::endl;
+        return 1;
+    }
+
     // Initialize the BitcoinExchange with the historical data
     BitcoinExchange btc;
     std::string line;
@@ -125,9 +132,17 @@ int main(int argc, char** argv) {
         }
         // Parse the value as a floating-point number (using strtod for C++98 compatibility)
         char* endPtr = NULL;
+        errno = 0;                          // 1) reset before strtod
+
         double value = std::strtod(valueStr.c_str(), &endPtr);
-        if (endPtr == valueStr.c_str() || *endPtr != '\0') {
-            // Conversion failed (no number) or extra characters after number
+
+        /*--- extra validation ----------------------------------------------------*/
+        bool notNumber   = (value != value);                     // NaN is the only value where x != x
+        bool isInfinity  = (value == HUGE_VAL || value == -HUGE_VAL);
+        bool overFlow    = (errno == ERANGE);                    // strtod overflow/underflow
+        /*-------------------------------------------------------------------------*/
+
+        if (endPtr == valueStr.c_str() || *endPtr != '\0' || notNumber || isInfinity || overFlow) {
             std::cout << "Error: bad input => " << trimmed << std::endl;
             continue;
         }
@@ -159,7 +174,7 @@ int main(int argc, char** argv) {
             std::cout << dateStr << " => " << valueOut << " = " << resultStr << std::endl;
         } catch (const std::out_of_range&) {
             // If the date is before the earliest data available, treat as bad input
-            std::cout << "Error: bad input => " << trimmed << std::endl;
+            std::cout << "Error: bad input - no earlier date available => " << trimmed << std::endl;
         }
     }
     return 0;

@@ -102,3 +102,28 @@ float BitcoinExchange::getRate(const std::string &date) const {
     --it;
     return it->second;
 }
+
+
+/*
+std::map::lower_bound performs a binary-tree search ( O(log N) ) and returns an iterator to the first element whose key is not-less-than the given key:
+
+cpp
+Copy
+Edit
+std::map<std::string, float> _someMap = {{"apple", 1.0f},
+                                         {"banana", 2.0f},
+                                         {"orange", 3.0f}};
+
+auto it = _someMap.lower_bound("banana");   // points to {"banana", 2.0f}
+auto it2 = _someMap.lower_bound("blueberry"); // points to {"orange", 3.0f}
+auto it3 = _someMap.lower_bound("zebra");   // == _someMap.end()
+If the key exists ("banana"), the iterator points directly at that element.
+
+If the key doesn’t exist, it points to the first key that is greater ("orange" for "blueberry").
+
+If no key is ≥ the search key, it returns map::end().
+
+On a const std::map, the iterator type is std::map<...>::const_iterator, so the pointed-to element is read-only.
+
+Typical uses: finding an insertion position without duplicates, range queries (via paired upper_bound), or fast prefix/lexicographic lookups in ordered maps.
+ */
