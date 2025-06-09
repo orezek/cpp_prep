@@ -179,3 +179,16 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
+
+
+
+/*
+Lexicographical Date Ordering: By using the ISO date format as keys, we leveraged the property that lexicographical string order corresponds to chronological order
+en.wikipedia.org
+. This made our implementation simpler – we did not need to convert dates to a timestamp or a custom struct. This is a common trick in systems dealing with dates; for instance, filenames or database keys often use YYYY-MM-DD strings so that sorting them alphabetically sorts by date.
+std::map and Efficiency: Our use of std::map ensures we meet the performance requirements (logarithmic lookups) and automatically handles ordering. Internally, most STL implementations use a Red-Black tree for std::map
+assets.hkoi.org
+, guaranteeing that operations like insert, find, and lower_bound are O(log n). The C++ standard mandates these complexity guarantees for ordered associative containers
+stackoverflow.com
+. In modern C++ (C++11 and above), one might consider std::unordered_map for faster average lookups (O(1) average), but that doesn’t maintain sorted order. Since we specifically need the nearest lower date, std::map (ordered) is the appropriate choice here.
+ */
