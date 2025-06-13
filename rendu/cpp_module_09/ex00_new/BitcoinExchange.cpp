@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <stdexcept>
 
+BitcoinExchange::BitcoinExchange() {}
+
 BitcoinExchange::BitcoinExchange(const std::string &dataFile) {
     // Open the provided CSV file containing historical Bitcoin prices
     std::ifstream data(dataFile.c_str());
@@ -81,6 +83,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other) {
     }
     return *this;
 }
+
 
 BitcoinExchange::~BitcoinExchange() {
     // No dynamic allocation to clean up; relying on RAII

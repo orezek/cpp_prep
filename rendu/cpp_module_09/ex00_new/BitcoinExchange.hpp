@@ -10,6 +10,7 @@ class BitcoinExchange {
 private:
     std::map<std::string, float> _rateData; // Map of date to Bitcoin price on that date
 public:
+    BitcoinExchange();
     BitcoinExchange(const std::string &dataFile = "data.csv");
     BitcoinExchange(const BitcoinExchange &other);
     BitcoinExchange &operator=(const BitcoinExchange &other);
