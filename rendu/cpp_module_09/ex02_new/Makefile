@@ -12,7 +12,7 @@ CCP =		c++
 CFLAGS =	-g -Wall -Wextra -Werror -std=c++98
 
 #sources
-SRC =	main.cpp
+SRC =	main.cpp PmergeMe.cpp
 
 #objects
 OBJ_PATH =	obj/
