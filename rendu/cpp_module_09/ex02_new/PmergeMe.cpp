@@ -65,3 +65,95 @@ void PmergeMe::makeJacobOrder(std::size_t p, std::vector<std::size_t>& order)
         ++k;
     }
 }
+
+
+/*------------- fordJohnsonSort for std::vector<int> ---------------------*/
+void PmergeMe::fordJohnsonSort(std::vector<int>& data)
+{
+    const std::size_t n = data.size();
+    if (n < 2) return;
+
+    const std::size_t pairCnt  = n / 2;
+    const bool        leftover = (n & 1) != 0;
+    int tailVal = 0;
+
+    std::vector<Pair> pairs;  pairs.reserve(pairCnt);
+    for (std::size_t i = 0; i < pairCnt; ++i) {
+        int a = data[2 * i];
+        int b = data[2 * i + 1];
+        if (a < b) pairs.push_back(Pair(b, a));
+        else       pairs.push_back(Pair(a, b));
+    }
+    if (leftover) tailVal = data.back();
+
+    /* sort pairs by their “max” component */
+    std::sort(pairs.begin(), pairs.end());
+
+    std::vector<int> mainChain;  mainChain.reserve(pairCnt + leftover);
+    std::vector<int> pend;       pend.reserve(pairCnt - 1 + leftover);
+
+    for (std::size_t i = 0; i < pairs.size(); ++i) {
+        mainChain.push_back(pairs[i].max);
+        if (i == 0) continue;            // B₀ handled later
+        pend.push_back(pairs[i].min);
+    }
+    mainChain.insert(mainChain.begin(), pairs[0].min);   // B₀
+    if (leftover) pend.push_back(tailVal);
+
+    std::vector<std::size_t> schedule;
+    makeJacobOrder(pend.size(), schedule);
+
+    for (std::size_t k = 0; k < schedule.size(); ++k) {
+        int val = pend[schedule[k]];
+        std::vector<int>::iterator pos =
+            std::lower_bound(mainChain.begin(), mainChain.end(), val);
+        mainChain.insert(pos, val);
+    }
+
+    data.assign(mainChain.begin(), mainChain.end());
+}
+
+/*------------- fordJohnsonSort for std::deque<int> ----------------------*/
+void PmergeMe::fordJohnsonSort(std::deque<int>& data)
+{
+    const std::size_t n = data.size();
+    if (n < 2) return;
+
+    const std::size_t pairCnt  = n / 2;
+    const bool        leftover = (n & 1) != 0;
+    int tailVal = 0;
+
+    std::vector<Pair> pairs;  pairs.reserve(pairCnt);    // still cheaper
+    for (std::size_t i = 0; i < pairCnt; ++i) {
+        int a = data[2 * i];
+        int b = data[2 * i + 1];
+        if (a < b) pairs.push_back(Pair(b, a));
+        else       pairs.push_back(Pair(a, b));
+    }
+    if (leftover) tailVal = data.back();
+
+    std::sort(pairs.begin(), pairs.end());
+
+    std::deque<int> mainChain;
+    std::vector<int> pend;      pend.reserve(pairCnt - 1 + leftover);
+
+    for (std::size_t i = 0; i < pairs.size(); ++i) {
+        mainChain.push_back(pairs[i].max);
+        if (i == 0) continue;
+        pend.push_back(pairs[i].min);
+    }
+    mainChain.push_front(pairs[0].min);       // B₀
+    if (leftover) pend.push_back(tailVal);
+
+    std::vector<std::size_t> schedule;
+    makeJacobOrder(pend.size(), schedule);
+
+    for (std::size_t k = 0; k < schedule.size(); ++k) {
+        int val = pend[schedule[k]];
+        std::deque<int>::iterator pos =
+            std::lower_bound(mainChain.begin(), mainChain.end(), val);
+        mainChain.insert(pos, val);
+    }
+
+    data.assign(mainChain.begin(), mainChain.end());
+}
