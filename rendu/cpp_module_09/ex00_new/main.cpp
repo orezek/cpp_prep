@@ -1,5 +1,3 @@
-// main.cpp
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -71,8 +69,23 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // --- HEADER VALIDATION ---
+    std::string header;
+    std::getline(input, header);
+    // Trim whitespace from header
+    size_t start_h = header.find_first_not_of(" \t\f\v\r");
+    size_t end_h = header.find_last_not_of(" \t\f\v\r");
+    std::string trimmedHeader = (start_h == std::string::npos) ? "" : header.substr(start_h, end_h - start_h + 1);
+
+    // Check if the trimmed header matches the required format
+    if (trimmedHeader != "date | value") {
+        std::cerr << "Error: Header is missing or invalid. Required format \"date | value\"" << std::endl;
+        return 1;
+    }
+    // --- END HEADER VALIDATION ---
+
     // Initialize the BitcoinExchange with the historical data
-    BitcoinExchange btc;
+    BitcoinExchange btc("data.csv");
     std::string line;
     // Process each line of the input file
     while (std::getline(input, line)) {
@@ -87,10 +100,7 @@ int main(int argc, char** argv) {
         if (trimmed.empty()) {
             continue;
         }
-        // Ignore a header line (e.g., "date | value") if present
-        if (trimmed == "date | value") {
-            continue;
-        }
+
         // Each valid line should contain a '|' separator between date and value
         size_t pipePos = trimmed.find('|');
         if (pipePos == std::string::npos) {
@@ -108,6 +118,7 @@ int main(int argc, char** argv) {
             valueStr = valueStr.substr(valueStr.find_first_not_of(" "));
         if (!valueStr.empty() && valueStr[valueStr.size()-1] == ' ')
             valueStr = valueStr.substr(0, valueStr.find_last_not_of(" ") + 1);
+
         // Validate date format and logical date values
         if (!isValidDateFormat(dateStr)) {
             std::cout << "Error: bad input => " << trimmed << std::endl;
@@ -179,16 +190,3 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
-
-
-
-/*
-Lexicographical Date Ordering: By using the ISO date format as keys, we leveraged the property that lexicographical string order corresponds to chronological order
-en.wikipedia.org
-. This made our implementation simpler – we did not need to convert dates to a timestamp or a custom struct. This is a common trick in systems dealing with dates; for instance, filenames or database keys often use YYYY-MM-DD strings so that sorting them alphabetically sorts by date.
-std::map and Efficiency: Our use of std::map ensures we meet the performance requirements (logarithmic lookups) and automatically handles ordering. Internally, most STL implementations use a Red-Black tree for std::map
-assets.hkoi.org
-, guaranteeing that operations like insert, find, and lower_bound are O(log n). The C++ standard mandates these complexity guarantees for ordered associative containers
-stackoverflow.com
-. In modern C++ (C++11 and above), one might consider std::unordered_map for faster average lookups (O(1) average), but that doesn’t maintain sorted order. Since we specifically need the nearest lower date, std::map (ordered) is the appropriate choice here.
- */
