@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#include <cmath>    // for HUGE_VAL
+#include <cerrno>   // for errno and ERANGE
 #include "BitcoinExchange.hpp"
 
 // Helper function to check basic date format "YYYY-MM-DD"

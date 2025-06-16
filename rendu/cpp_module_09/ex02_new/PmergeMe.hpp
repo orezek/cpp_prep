@@ -66,7 +66,7 @@ private:
         fordJohnsonSort(largeElements);
         std::vector<Pair> sortedPairs;
         sortedPairs.reserve(pairs.size());
-        // This reconstruction loop can be optimized, but is functionally correct.
+        // reconstruction loop .
         for (size_t i = 0; i < largeElements.size(); ++i) {
             for (size_t j = 0; j < pairs.size(); ++j) {
                 if (pairs[j].first == largeElements[i]) {
